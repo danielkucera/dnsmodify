@@ -62,7 +62,7 @@ unsigned int hook_func(void *priv,
 		} else {
 			if (j == search_len) {
         	            printk(KERN_INFO "dnsmodify: packet matched\n");
-			    udp_header->dest = 1053;
+			    udp_header->dest = (unsigned short int) ntohs(1053);
 			    return NF_ACCEPT;
 			}
 			if (j > 0) {
