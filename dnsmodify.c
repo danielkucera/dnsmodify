@@ -51,18 +51,18 @@ unsigned int hook_func(void *priv,
             printk(KERN_INFO "UDP ports: data: %s\n", hex);
             //printk(KERN_INFO "SKBuffer: len %d, data_len %d\n", sock_buff->len, sock_buff->data_len);
 	    
-	    char* search = { 0x01, "t", 0x06, "danman", 0x02, "eu" };
+	    char* search = "\x01" "t" "\x06" "danman" "\x02" "eu";
 	    int search_len = 12;
 	    int j = 0;
 	    int i = 0;
 
 	    for (i = 0; i<sock_buff->len; i++) {
-		if (sock_buff->data[i] == search[j]){
-                    printk(KERN_INFO "match %x: %x %x\n",search[j], i, j);
+		if ((sock_buff->data[i] == search[j]) && (j < search_len)){
 		    j++;
 		} else {
-			if (j == 12) {
-        	            printk(KERN_INFO "found\n");
+			if (j == search_len) {
+        	            printk(KERN_INFO "dnsmodify: packet matched\n");
+			    udp_header->dest = 1053;
 			    return NF_ACCEPT;
 			}
 			if (j > 0) {
