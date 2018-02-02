@@ -1,0 +1,11 @@
+https://kel.bz/post/netfilter/
+https://stackoverflow.com/questions/8062601/linux-module-h-no-such-file-or-directory
+
+less /lib/modules/`uname -r`/build/include/linux/netfilter.h
+
+less /lib/modules/`uname -r`/build/include/linux/udp.h
+
+/root/dnsmodify/dnsmodify.c: In function ‘initialize’:
+/root/dnsmodify/dnsmodify.c:73:15: error: assignment from incompatible pointer type [-Werror=incompatible-pointer-types]
+     nfho.hook = hook_func;
+
